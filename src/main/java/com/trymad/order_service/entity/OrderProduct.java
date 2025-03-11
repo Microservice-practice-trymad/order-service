@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "order_items")
-public class OrderItem {
+public class OrderProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class OrderItem {
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
-    @Column(nullable = false)
-    private Integer quantity;
+    @Column(nullable = false, name = "quantity")
+    private Integer count;
 
 }

@@ -40,6 +40,6 @@ public class Order {
     private OrderStatusEntity status;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-	private List<OrderItem> items = new ArrayList<>();
+	private List<OrderProduct> items = new ArrayList<>();
 
 }
