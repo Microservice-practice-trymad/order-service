@@ -34,5 +34,7 @@ build/
 
 #test data
 src/main/resources/data.sql
-#env
+
+src/main/resources/META-INF
 .env
+

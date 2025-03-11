@@ -5,4 +5,7 @@ spring:
     password: ${DB_PASSWORD}
 server:
   port: ${PORT:8080}
-
+product:
+  url: ${PRODUCTS_URL}
+user:
+  url: ${USERS_URL}
