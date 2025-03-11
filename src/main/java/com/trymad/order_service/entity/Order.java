@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class Order {
     @JoinColumn(name = "order_status", nullable = false)
     private OrderStatusEntity status;
 
-	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<OrderProduct> items = new ArrayList<>();
 
 }

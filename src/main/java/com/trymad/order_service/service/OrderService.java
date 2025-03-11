@@ -13,6 +13,7 @@ import com.trymad.order_service.entity.OrderProduct;
 import com.trymad.order_service.model.OrderStatus;
 import com.trymad.order_service.repository.OrderRepository;
 import com.trymad.order_service.web.client.ProductClient;
+import com.trymad.order_service.web.client.UserClient;
 import com.trymad.order_service.web.dto.OrderCreateDTO;
 import com.trymad.order_service.web.dto.ProductDTO;
 import com.trymad.order_service.web.dto.ProductListDTO;
@@ -29,8 +30,12 @@ public class OrderService {
 	
 	@Lazy private final OrderService orderService;
 	private final OrderStatusService statusService;
+
 	private final OrderRepository orderRepository;
+
 	private final ProductClient productClient;
+	private final UserClient userClient;
+
 	private final OrderProductMapper orderProductMapper;
 
 	public Order getById(Long id) {
@@ -40,10 +45,11 @@ public class OrderService {
 	}
 
 	public Order createOrder(OrderCreateDTO createDto) {
+		userClient.getById(createDto.userId()); // check if exists
 		if(createDto.productList().isEmpty()) {
 			throw new IllegalArgumentException("Product list in order is empty");
 		}
-		
+
 		final Set<ProductListDTO> decreaseQuantitySet = createDto.productList().stream()
 			.map(productList -> {
 				final ProductListDTO dto = new ProductListDTO(productList.id(), productList.count() * -1);
@@ -59,7 +65,6 @@ public class OrderService {
 
 		final Order order = new Order();
 		orderProducts.forEach(orderProduct -> orderProduct.setOrder(order));
-
 		order.setItems(orderProducts);
 		order.setUserId(createDto.userId());
 		order.setStatus(statusService.get(OrderStatus.IN_PROGRESS));

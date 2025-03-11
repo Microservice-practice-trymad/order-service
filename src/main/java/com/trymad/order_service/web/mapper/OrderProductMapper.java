@@ -14,9 +14,11 @@ import com.trymad.order_service.web.dto.ProductDTO;
 public interface OrderProductMapper {
 	
 	@Mapping(target = "productId", source = "id")
+	@Mapping(target = "id", ignore = true)
 	OrderProduct toEntity(ProductDTO productDTO);
 
 	@Mapping(target = "productId", source = "id")
+	@Mapping(target = "id", ignore = true)
 	List<OrderProduct> toEntity(Collection<ProductDTO> productDTO);
 
 }
