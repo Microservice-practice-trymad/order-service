@@ -15,18 +15,17 @@ import com.trymad.order_service.web.dto.ProductListDTO;
 
 
 @FeignClient(
-    name = "product-service", 
-    url = "${product.url}"
+    name = "${client.product.name}"
 )
 public interface ProductClient {
 	
 	@GetMapping
 	List<ProductDTO> getAll(@RequestParam List<Long> ids);
 
-	@GetMapping("{id}")
+	@GetMapping("${client.product.apiPath}/{id}")
 	ProductDTO getById(@PathVariable Long id);
 
-	@PutMapping("change-quantity")
+	@PutMapping("${client.product.apiPath}/change-quantity")
 	List<ProductDTO> changeProductQuantity(@RequestBody Set<ProductListDTO> products);
 
 }

@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.trymad.order_service.web.dto.UserDTO;
 
 @FeignClient(
-    name = "user-service", 
-    url = "${user.url}"
+    name = "${client.user.name}"
 )
 public interface UserClient {
 	
-	@GetMapping("{uuid}")
+	@GetMapping("${client.user.apiPath}/{uuid}")
 	UserDTO getById(@PathVariable UUID uuid);
 
 }
