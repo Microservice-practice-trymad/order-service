@@ -1,22 +1,13 @@
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
   application:
-    name: ${SERVICE_NAME:order-service}
+    name: order-service  
+  config:
+    import: 'configserver:'
+  cloud:
+    config:
+      uri: ${CONFIG_SERVICE_URL:http://localhost:8888}  
+      label: ${CONFIG_LABEL:main}  
+      profile: ${APP_PROFILE:default}  
 server:
-  port: ${PORT:8080}
-eureka:
-  client:
-    service-url:
-      defaultZone: ${DISCOVERY_SERVER_URL:http://localhost:8761/eureka}
-  instance:
-    prefer-ip-address: true
-client:
-  user:
-    name: ${USER_SERVICE_NAME:user-service}
-    apiPath: ${USER_SERVICE_API_PATH:api/v1/users}
-  product:
-    name: ${PRODUCT_SERVICE_NAME:product-service}
-    apiPath: ${PRODUCT_SERVICE_API_PATH:api/v1/products}
+  port: ${PORT:8082}
+
