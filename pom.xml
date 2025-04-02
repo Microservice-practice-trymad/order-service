@@ -12,8 +12,8 @@
 
 	<groupId>com.trymad</groupId>
 	<artifactId>order-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>order-service</name>
+	<version>0.0.2</version>
+	<name>trymad/study-order-service</name>
 	<description></description>
 
 	<properties>
@@ -98,6 +98,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 	</dependencies>
 
