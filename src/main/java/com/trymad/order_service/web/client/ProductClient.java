@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.trymad.order_service.web.dto.ProductDTO;
 import com.trymad.order_service.web.dto.ProductListDTO;
 
-
 @FeignClient(
-    name = "${client.product.name}"
+    name = "${service.productService.name}",
+	url = "${service.productService.protocol}://${service.productService.name}:${service.productService.port}"
 )
 public interface ProductClient {
 	
 	@GetMapping
 	List<ProductDTO> getAll(@RequestParam List<Long> ids);
 
-	@GetMapping("${client.product.apiPath}/{id}")
+	@GetMapping("${service.productService.apiPath}/{id}")
 	ProductDTO getById(@PathVariable Long id);
 
-	@PutMapping("${client.product.apiPath}/change-quantity")
+	@PutMapping("${service.productService.apiPath}/change-quantity")
 	List<ProductDTO> changeProductQuantity(@RequestBody Set<ProductListDTO> products);
 
 }
